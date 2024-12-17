@@ -7,14 +7,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 
 
-def fetch_spacex_last_launch():
-    response = requests.get(
-        'https://api.spacexdata.com/v5/launches/5eb87d47ffd86e000604b38a'
-    )
-    response.raise_for_status()
-    api_urls = response.json()
-    image_urls = api_urls['links']['flickr']['original']
-    download_images(image_urls, 'images/SpaceX')
+
 
 
 def download_images(urls, path='images'):
@@ -60,7 +53,7 @@ def get_30_nasa_images():
 
     hdurls = [item['hdurl'] for item in images_info if 'hdurl' in item]
 
-    download_images(hdurls, 'images/NASA')
+    return hdurls
 
 
 def get_earth_photo():
@@ -77,23 +70,26 @@ def get_earth_photo():
     images_urls_info = {item['date']: item['image']
                         for item in images_info if 'date' in item and 'image' in item}
 
-    image_urls = []
+    image_links = []
 
     for date_time, image_name in images_urls_info.items():
         date = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
         formatted_date = date.strftime("%Y/%m/%d")
         image_url = f'https://api.nasa.gov/EPIC/archive/natural/{
             formatted_date}/png/{image_name}.png?api_key={params["api_key"]}'
-        image_urls.append(image_url)
+        image_links.append(image_url)
 
-    download_images(image_urls, 'images/NASA_Earth')
+    return image_links
 
 
 def main():
     load_dotenv()
-    fetch_spacex_last_launch()
-    get_30_nasa_images()
-    get_earth_photo()
+    image_urls = fetch_spacex_last_launch()
+    download_images(image_urls, 'images/SpaceX')
+    hdurls = get_30_nasa_images()
+    download_images(hdurls, 'images/NASA')
+    image_links = get_earth_photo()
+    download_images(image_links, 'images/NASA_Earth')
 
 
 if __name__ == '__main__':
