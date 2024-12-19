@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from telegram import Bot
+from telegram import Bot, InputMediaDocument
 
 
 load_dotenv()
@@ -19,5 +19,7 @@ bot_info = {
 print(bot_info)
 
 channel_id = '@Home_Gamer_tg'
-bot.send_message(chat_id=channel_id, text="Тестовое сообщение@")
+# bot.send_message(chat_id=channel_id, text="Тестовое сообщение@")
+bot.send_document(chat_id=channel_id, document=open('images/NASA/image_20241218_175029_2.jpeg', 'rb')) # Отправка без сжатия
+bot.send_photo(chat_id=channel_id, photo=open('images/NASA/image_20241218_175029_2.jpeg', 'rb')) # Отправка с сжатием
 
