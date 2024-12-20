@@ -18,7 +18,7 @@ def download_images(urls, path='images'):
     try:
         folder_name.mkdir(parents=True, exist_ok=True)
     except FileExistsError:
-        print(f'Папка "{folder_name}" уже существует.')
+        print(f'The folder "{folder_name}" already exists.')
 
     for index, url in enumerate(urls):
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -43,20 +43,29 @@ def get_image_format(url):
 def main():
     load_dotenv()
     parser = argparse.ArgumentParser(
-        description='Скачивание фотографий.'
+        description='Downloading photos.'
     )
-    parser.add_argument('--id', type=str, help='ID запуска SpaceX')
-    parser.add_argument('--count', type=int, default=30,
-                        help='Количество фотографий из NASA')
+    parser.add_argument('--id', type=str, help='SpaceX launch ID')
     parser.add_argument(
-        '--date', type=str, help='Дата получения снимков земли (не ранее 2 дней назад)')
+        '--count',
+        type=int,
+        default=30,
+        help='Number of photos from NASA'
+    )
+    parser.add_argument(
+        '--date', 
+        type=str, 
+        help='''Date of obtaining Earth images (no earlier than 2 days ago)''')
     args = parser.parse_args()
     image_urls = fetch_spacex_last_launch(args.id)
 
     if image_urls:
         download_images(image_urls, 'images/SpaceX')
     else:
-        print('Можете попробовать этот id: "5eb87d47ffd86e000604b38a". Тут точно есть фотографии')
+        print(
+        '''You can try this ID: "5eb87d47ffd86e000604b38a".
+        There are definitely photos here.'''
+        )
 
     hdurls = get_nasa_images(args.count)
     if hdurls:

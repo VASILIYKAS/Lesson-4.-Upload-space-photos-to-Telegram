@@ -17,9 +17,13 @@ def get_earth_photo(formatted_date=None):
         date_url = 'https://api.nasa.gov/EPIC/api/natural'
     else:
         if formatted_date == today_str or formatted_date == yesterday_str:
-            return print('Фотографий за сегодня и вчера ещё нет. Пожалуйста, укажите более позднюю дату.')
-        
-        date_url = f'https://api.nasa.gov/EPIC/api/natural/date/{formatted_date}'
+            return print(
+                '''There are no photos available for today and yesterday. 
+                Please specify a later date.'''
+                    )
+
+        date_url = f'https://api.nasa.gov/EPIC/api/natural/date/{
+            formatted_date}'
 
     response = requests.get(date_url, params=params)
     response.raise_for_status()
@@ -37,5 +41,3 @@ def get_earth_photo(formatted_date=None):
         image_links.append(image_url)
 
     return image_links
-
-

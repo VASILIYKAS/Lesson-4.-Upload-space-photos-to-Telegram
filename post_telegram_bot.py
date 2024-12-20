@@ -40,11 +40,14 @@ def main():
     periodicity = int(os.getenv('POST_PERIODICITY'))
 
     parser = argparse.ArgumentParser(
-        description='Автоматическая публикация фотографий.'
+        description='Automatic photo publishing.'
     )
-    parser.add_argument('--periodicity', type=str, default=14400,
-                        help='Частота публикаций в секундах. (По умолчанию 4 часа)'
-                        )
+    parser.add_argument(
+        '--periodicity', 
+        type=str, 
+        default=14400,
+        help='Frequency of publications in seconds. (Default is 4 hours).'
+    )
 
     args = parser.parse_args()
     post_images(bot, channel_id, args.periodicity)

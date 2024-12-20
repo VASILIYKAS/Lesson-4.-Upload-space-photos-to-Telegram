@@ -4,7 +4,7 @@ import requests
 
 def get_nasa_images(count=10):
     if count is None or count < 1 or count > 100:
-        print('Количество изображений для скачивания должно быть от 1 до 100')
+        print('The number of images to download must be between 1 and 100')
         return
     
     params = {

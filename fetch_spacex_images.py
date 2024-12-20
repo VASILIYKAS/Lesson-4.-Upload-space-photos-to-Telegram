@@ -18,6 +18,9 @@ def fetch_spacex_last_launch(last_launch_id=None):
     image_urls = last_launch_info['links']['flickr']['original']
 
     if not image_urls:
-        print('Фотографий на запуске SpaceX не делали. Попробуйте другой id')
+        print(
+            '''No photographs were taken during the SpaceX launch. 
+              Please try another ID.'''
+        )
     else:
         return image_urls
