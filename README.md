@@ -42,7 +42,7 @@ This project consists of a Telegram bot that automatically publishes images to a
 
 ```bash
 git clone https://github.com/VASILIYKAS/Lesson-4.-Upload-space-photos-to-Telegram.git
-cd repository-name
+cd Lesson-4.-Upload-space-photos-to-Telegram
 ```
 Install the required packages:
 
@@ -58,8 +58,10 @@ Create a .env file in the root directory and add your Telegram bot token and oth
 ## Usage
 To run the bot, execute the following command:
 ```bash
-python post_telegram_bot.py
+python automatically_post_telegram_bot.py
 ```
+When you run this command, the bot will start publishing all images available in the `images` folder at an interval of 4 hours.\
+\
 To download images, use the following command:
 ```bash
 python main.py
@@ -71,6 +73,8 @@ In this case, default values will be used:
 ```bash
 python main.py --id number-id
 ```
+You can see the launch ID number [here](https://api.spacexdata.com/v5/launches). At the end of each launch, there is a line with the ID, for example: "id": "5eb87cd9ffd86e000604b32a".
+\
 - For NASA's Astronomy Picture of the Day (APOD): You can specify the number of pictures. The default is set to 30, but to change it (with a maximum of 100), enter the command:
 ```bash
 python main.py --count number-of-pictures
