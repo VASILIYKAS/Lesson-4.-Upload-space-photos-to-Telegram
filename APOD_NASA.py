@@ -2,11 +2,15 @@ import os
 import requests
 
 
-def get_nasa_images(count=10):
-    if count is None or count < 1 or count > 100:
+MIN_IMAGES = 1
+MAX_IMAGES = 100
+
+
+def get_nasa_images(count=30):
+    if count is None or count < MIN_IMAGES or count > MAX_IMAGES:
         print('The number of images to download must be between 1 and 100')
         return
-    
+
     params = {
         'api_key': os.getenv('NASA_API_KEY'),
         'count': count,

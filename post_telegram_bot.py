@@ -6,7 +6,11 @@ from dotenv import load_dotenv
 from telegram import Bot
 
 
-def post_images(bot, channel_id, periodicity=14400):
+TWENTY_MEGABYTES = 20000000
+FOUR_HOURS = 14400
+
+
+def post_images(bot, channel_id, periodicity=FOUR_HOURS):
     images = []
 
     for dirpath, directory, filenames in os.walk("images"):
@@ -23,7 +27,7 @@ def post_images(bot, channel_id, periodicity=14400):
         current_image = images.pop(0)
         size_image = os.path.getsize(current_image)
 
-        if size_image < 20000000: 
+        if size_image < TWENTY_MEGABYTES: 
                 bot.send_photo(chat_id=channel_id, photo=open(current_image, 'rb'))
 
         time.sleep(periodicity)
@@ -45,7 +49,7 @@ def main():
     parser.add_argument(
         '--periodicity', 
         type=str, 
-        default=14400,
+        default=FOUR_HOURS,
         help='Frequency of publications in seconds. (Default is 4 hours).'
     )
 
