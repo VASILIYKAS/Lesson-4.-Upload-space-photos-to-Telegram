@@ -23,9 +23,9 @@ def download_images(urls, path='images'):
     except FileExistsError:
         print(f'The folder "{folder_name}" already exists.')
 
-    for index, url in enumerate(urls):
+    for index, url in enumerate(urls, start=1):
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        filename = f'image_{timestamp}_{index + 1}.jpeg'
+        filename = f'image_{timestamp}_{index}.jpeg'
         file_path = folder_name / filename
 
         response = requests.get(url)
