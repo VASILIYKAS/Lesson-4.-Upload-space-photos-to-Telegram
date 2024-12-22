@@ -28,7 +28,7 @@ def post_images(bot, channel_id, periodicity=FOUR_HOURS):
 def main():
     load_dotenv()
 
-    TOKEN = os.getenv('TG_TOKEN')
+    TOKEN = os.environ['TG_TOKEN']
     bot = Bot(token=TOKEN)
     channel_id = os.getenv('TG_CHAT_ID')
     periodicity = int(os.getenv('POST_PERIODICITY', ))
