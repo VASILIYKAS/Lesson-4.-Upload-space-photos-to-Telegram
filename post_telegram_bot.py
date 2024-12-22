@@ -31,7 +31,7 @@ def main():
 
     TOKEN = os.getenv('TG_TOKEN')
     bot = Bot(token=TOKEN)
-    channel_id = '@Home_Gamer_tg'
+    channel_id = os.getenv('TG_CHAT_ID')
     post_image(bot, channel_id)
 
 

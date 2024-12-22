@@ -30,7 +30,7 @@ def main():
 
     TOKEN = os.getenv('TG_TOKEN')
     bot = Bot(token=TOKEN)
-    channel_id = '@Home_Gamer_tg'
+    channel_id = os.getenv('TG_CHAT_ID')
     periodicity = int(os.getenv('POST_PERIODICITY', ))
 
     parser = argparse.ArgumentParser(
