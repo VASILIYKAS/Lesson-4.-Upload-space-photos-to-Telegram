@@ -1,6 +1,8 @@
 import os
 import requests
 from datetime import datetime, timedelta
+from urllib.parse import urlencode
+
 
 
 def get_date_str():
@@ -51,10 +53,15 @@ def get_urls_earth_photo(nasa_api_key, formatted_date=None):
     for date_time, image_name in images_urls_info.items():
         date = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
         formatted_date = date.strftime("%Y/%m/%d")
-        image_url = f'https://api.nasa.gov/EPIC/archive/natural/{
-            formatted_date}/png/{image_name}.png?api_key={nasa_api_key}'
+
+        params = {
+            'api_key': nasa_api_key,
+        }
+    
+        base_url = f'https://api.nasa.gov/EPIC/archive/natural/{formatted_date}/png/{image_name}.png'
+        image_url = f"{base_url}?{urlencode(params)}"
         image_links.append(image_url)
-    print(image_links)
+        print(image_links)
     return image_links
 
 
