@@ -17,11 +17,7 @@ NUMBER_IMAGES = 30
 
 def create_folder(path):
     folder_name = Path(path)
-
-    try:
-        folder_name.mkdir(parents=True, exist_ok=True)
-    except FileExistsError:
-        print(f'The folder "{folder_name}" already exists.')
+    folder_name.mkdir(parents=True, exist_ok=True)
     return folder_name
 
 
