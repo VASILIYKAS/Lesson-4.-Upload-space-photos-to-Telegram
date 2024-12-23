@@ -29,9 +29,9 @@ def get_date_url(formatted_date=None):
     return date_url
 
 
-def get_images_info(date_url, NASA_TOKEN):
+def get_images_info(date_url, nasa_api_key):
     params = {
-        'api_key': NASA_TOKEN,
+        'api_key': nasa_api_key,
     }
 
     response = requests.get(date_url, params=params)
@@ -40,10 +40,9 @@ def get_images_info(date_url, NASA_TOKEN):
     return images_info
 
 
-def get_urls_earth_photo(NASA_TOKEN, formatted_date=None):
+def get_urls_earth_photo(nasa_api_key, formatted_date=None):
     date_url = get_date_url(formatted_date)
-
-    images_info = get_images_info(date_url, NASA_TOKEN)
+    images_info = get_images_info(date_url, nasa_api_key)
 
     images_urls_info = {item['date']: item['image']
                         for item in images_info if 'date' in item and 'image' in item}
@@ -53,16 +52,16 @@ def get_urls_earth_photo(NASA_TOKEN, formatted_date=None):
         date = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
         formatted_date = date.strftime("%Y/%m/%d")
         image_url = f'https://api.nasa.gov/EPIC/archive/natural/{
-            formatted_date}/png/{image_name}.png?api_key={NASA_TOKEN}'
+            formatted_date}/png/{image_name}.png?api_key={nasa_api_key}'
         image_links.append(image_url)
     print(image_links)
     return image_links
 
 
 def main():
-    NASA_TOKEN = os.environ['NASA_API_KEY']
+    nasa_api_key = os.environ['NASA_API_KEY']
 
-    get_urls_earth_photo(NASA_TOKEN)
+    get_urls_earth_photo(nasa_api_key)
 
 
 if __name__ == '__main__':

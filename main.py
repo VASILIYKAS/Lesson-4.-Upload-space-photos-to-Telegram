@@ -61,6 +61,7 @@ def get_image_format(url):
 
 def main():
     load_dotenv()
+
     parser = argparse.ArgumentParser(
         description='Downloading photos.'
     )
@@ -78,11 +79,13 @@ def main():
         type=str,
         help='''Date of obtaining Earth images (no earlier than 2 days ago)''')
 
+    folder_path = os.getenv('FOLDER_PATH')
+
     args = parser.parse_args()
     image_urls = fetch_spacex_last_launch(args.id)
 
     if image_urls:
-        download_images(image_urls, 'images/SpaceX')
+        download_images(image_urls, f'{folder_path}/SpaceX')
     else:
         print(
             '''You can try this ID: "5eb87d47ffd86e000604b38a".
@@ -91,12 +94,12 @@ def main():
 
     hdurls = get_nasa_images(args.count)
     if hdurls:
-        download_images(hdurls, 'images/NASA')
+        download_images(hdurls, f'{folder_path}/NASA')
 
-    NASA_TOKEN = os.environ['NASA_API_KEY']
+    nasa_api_key = os.environ['NASA_API_KEY']
 
-    image_links = get_urls_earth_photo(NASA_TOKEN, args.date)
-    download_images(image_links, 'images/NASA_Earth')
+    image_links = get_urls_earth_photo(nasa_api_key, args.date)
+    download_images(image_links, f'{folder_path}/NASA_Earth')
 
 
 if __name__ == '__main__':

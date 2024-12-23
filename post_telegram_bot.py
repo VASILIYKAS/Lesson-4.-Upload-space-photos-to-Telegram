@@ -29,8 +29,8 @@ def post_image(bot, channel_id, image_name=None):
 def main():
     load_dotenv()
 
-    TOKEN = os.environ['TG_TOKEN']
-    bot = Bot(token=TOKEN)
+    tg_token = os.environ['TG_TOKEN']
+    bot = Bot(token=tg_token)
     channel_id = os.getenv('TG_CHAT_ID')
     post_image(bot, channel_id)
 
