@@ -92,11 +92,11 @@ def main():
         There are definitely photos here.'''
         )
 
-    hdurls = get_nasa_images(args.count)
+    nasa_api_key = os.environ['NASA_API_KEY']
+
+    hdurls = get_nasa_images(nasa_api_key, args.count)
     if hdurls:
         download_images(hdurls, f'{folder_path}/NASA')
-
-    nasa_api_key = os.environ['NASA_API_KEY']
 
     image_links = get_urls_earth_photo(nasa_api_key, args.date)
     download_images(image_links, f'{folder_path}/NASA_Earth')
