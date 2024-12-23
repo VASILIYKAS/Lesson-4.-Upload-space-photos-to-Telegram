@@ -32,9 +32,8 @@ This project consists of a Telegram bot that automatically publishes images to a
 - Python 3.12.6
 - `python-telegram-bot` library
 - `requests` library
-- `urllib3` library
 - `python-dotenv` library
-- `pathlib` library
+
 
 ## Installation
 
@@ -54,7 +53,12 @@ Create a .env file in the root directory and add your Telegram bot token and oth
 
 `TG_TOKEN=your_telegram_bot_token` # You can get it here [BotFather](https://telegram.me/BotFather).\
 `POST_PERIODICITY=14400`  # Time in seconds between posts.\
-`NASA_API_KEY=your_nasa_token` # You can get it here [NASA API](https://api.nasa.gov/).
+`NASA_API_KEY=your_nasa_token` # You can get it here [NASA API](https://api.nasa.gov/).\
+`TG_CHAT_ID=сhat_id_of_your_channel` # You can find it out through bot [userinfobot](https://telegram.me/userinfobot) by forwarding any message from your channel to it. In response, the bot will write the first line: the username (or nickname) starts with the @ sign, which can be used as chat_id, and the second line is the same chat_id but in numbers, which always starts with a "minus" sign. For example:
+```
+TG_CHAT_ID=@example_tg or TG_CHAT_ID=-1001112223334
+```
+`FOLDER_PATH=images` The name of the folder where images will be downloaded, by default it is `images`, but you can change it to any other folder.
 ## Usage
 To run the bot, execute the following command:
 ```bash
@@ -83,6 +87,14 @@ python main.py --count number-of-pictures
 ```bash
 python main.py --date date
 ```
+- For the image publishing bot, you can specify the posting frequency. By default, it is set to every 4 hours.
+```bash
+python automatically_post_telegram_bot.py --periodicity Frequency-in-seconds
+```
+- For the bot that sends an image by its name, there is also a default value. If you do not specify the name of the image, a random image from the images folder will be sent.
+```bash
+python post_telegram_bot.py --image_name The-name-of-the-image-including-its-extension
+```
 ## API Functions
 ### NASA API
 The function responsible for generating image links from the NASA API fetches images related to space exploration. You can customize the API endpoint or parameters as needed.
@@ -91,11 +103,11 @@ The function responsible for generating image links from the NASA API fetches im
 Similarly, the function for the SpaceX API retrieves images related to SpaceX missions and launches. This function can also be modified to adjust the data fetched from the API.
 
 ## Telegram Bot
-The Telegram bot is implemented in a separate file and is responsible for:
+The Telegram bot is implemented in two files. One is needed for periodically sending images to the specified channel. The other is for manually sending images to the channel by the filename:
 
 - Periodically sending images to a specified Telegram channel.
-- Checking image sizes before sending to ensure they meet the size requirements.
 - Reshuffling the image list once all images have been sent.
+- Manual sending of an image or a random image to the specified Telegram channel.
 
 ## Project goal
 Code written for educational purposes in an online course for web developers [dvmn.org](https://dvmn.org/).
