@@ -1,6 +1,7 @@
 import requests
 import os
 import argparse
+import random
 
 from fetch_spacex_images import fetch_spacex_last_launch
 from EPIC_NASA import get_urls_earth_photo
@@ -21,34 +22,27 @@ def create_folder(path):
     return folder_name
 
 
-def generate_filename(index):
+def generate_filename():
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    return f'image_{timestamp}_{index}.jpeg'
+    random_number = random.randint(1, 9999)
+    return f'image_{timestamp}_{random_number}.jpeg'
 
 
-def generate_image_path(urls, path='images'):
+def generate_image_path(url, path='images'):
     folder_name = create_folder(path)
-    file_paths = []
-
-    for index, url in enumerate(urls, start=1):
-        filename = generate_filename(index)
-        file_path = folder_name / filename
-        file_paths.append(file_path)
-
-    return file_paths
+    filename = generate_filename()
+    file_path = folder_name / filename
+    return file_path
 
 
-def download_images(urls, path='images'):
-    file_paths = generate_image_path(urls, path)
+def download_image(url, path='images'):
+    file_path = generate_image_path(url, path)
 
-    for i in range(len(urls)):
-        url = urls[i]
-        file_path = file_paths[i]
-        response = requests.get(url)
-        response.raise_for_status()
+    response = requests.get(url)
+    response.raise_for_status()
 
-        with open(file_path, 'wb') as file:
-            file.write(response.content)
+    with open(file_path, 'wb') as file:
+        file.write(response.content)
 
 
 def get_image_format(url):
@@ -86,7 +80,8 @@ def main():
     image_urls = fetch_spacex_last_launch(args.id)
 
     if image_urls:
-        download_images(image_urls, f'{folder_path}/SpaceX')
+        for image in image_urls:
+            download_image(image, f'{folder_path}/SpaceX')
     else:
         print(
             '''You can try this ID: "5eb87d47ffd86e000604b38a".
@@ -97,10 +92,12 @@ def main():
 
     hdurls = get_nasa_images(nasa_api_key, args.count)
     if hdurls:
-        download_images(hdurls, f'{folder_path}/NASA')
+        for image in hdurls:
+            download_image(image, f'{folder_path}/NASA')
 
     image_links = get_urls_earth_photo(nasa_api_key, args.date)
-    download_images(image_links, f'{folder_path}/NASA_Earth')
+    for image in image_links:
+        download_image(image, f'{folder_path}/NASA_Earth')
 
 
 if __name__ == '__main__':
