@@ -2,6 +2,7 @@ import os
 import requests
 from datetime import datetime, timedelta
 from urllib.parse import urlencode
+from dotenv import load_dotenv
 
 
 
@@ -65,6 +66,8 @@ def get_urls_earth_photo(nasa_api_key, formatted_date=None):
 
 
 def main():
+    load_dotenv()
+    
     nasa_api_key = os.environ['NASA_API_KEY']
 
     get_urls_earth_photo(nasa_api_key)

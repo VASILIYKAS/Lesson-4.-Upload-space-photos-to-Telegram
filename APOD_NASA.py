@@ -1,5 +1,6 @@
 import os
 import requests
+from dotenv import load_dotenv
 
 
 MIN_IMAGES = 1
@@ -29,6 +30,8 @@ def get_nasa_images(nasa_api_key, count=30):
 
 
 def main():
+    load_dotenv()
+    
     nasa_api_key = os.environ['NASA_API_KEY']
     get_nasa_images(nasa_api_key)
 
