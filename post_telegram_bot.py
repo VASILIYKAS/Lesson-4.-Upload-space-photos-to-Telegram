@@ -33,7 +33,7 @@ def main():
 
     tg_token = os.environ['TG_TOKEN']
     bot = Bot(token=tg_token)
-    channel_id = os.getenv('TG_CHAT_ID')
+    channel_id = os.environ['TG_CHAT_ID']
 
     parser = argparse.ArgumentParser(
         description='Manual photo publishing.'
@@ -47,7 +47,7 @@ def main():
     )
 
     args = parser.parse_args()
-    
+
     post_image(bot, channel_id, args.image_name)
 
 

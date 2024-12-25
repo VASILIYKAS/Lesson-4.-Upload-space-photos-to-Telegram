@@ -30,8 +30,8 @@ def main():
 
     TOKEN = os.environ['TG_TOKEN']
     bot = Bot(token=TOKEN)
-    channel_id = os.getenv('TG_CHAT_ID')
-    periodicity = int(os.getenv('POST_PERIODICITY', ))
+    channel_id = os.environ['TG_CHAT_ID']
+    periodicity = int(os.getenv('POST_PERIODICITY', default=14400 ))
 
     parser = argparse.ArgumentParser(
         description='Automatic photo publishing.'

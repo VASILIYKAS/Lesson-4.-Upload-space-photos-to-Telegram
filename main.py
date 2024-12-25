@@ -77,9 +77,10 @@ def main():
     parser.add_argument(
         '--date',
         type=str,
-        help='''Date of obtaining Earth images (no earlier than 2 days ago)''')
+        help='''Date of obtaining Earth images (no earlier than 2 days ago)'''
+    )
 
-    folder_path = os.getenv('FOLDER_PATH')
+    folder_path = os.getenv('FOLDER_PATH', default='images')
 
     args = parser.parse_args()
     image_urls = fetch_spacex_last_launch(args.id)

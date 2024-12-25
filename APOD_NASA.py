@@ -29,7 +29,7 @@ def get_nasa_images(nasa_api_key, count=30):
 
 
 def main():
-    nasa_api_key = os.getenv('NASA_API_KEY')
+    nasa_api_key = os.environ['NASA_API_KEY']
     get_nasa_images(nasa_api_key)
 
 
