@@ -60,8 +60,12 @@ def get_urls_earth_photo(nasa_api_key, formatted_date=None):
         }
     
         base_url = f'https://api.nasa.gov/EPIC/archive/natural/{formatted_date}/png/{image_name}.png'
-        image_url = f"{base_url}?{urlencode(params)}"
+        
+        response = requests.get(base_url, params=params)
+
+        image_url = response.url
         image_links.append(image_url)
+        
     return image_links
 
 
