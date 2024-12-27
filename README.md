@@ -83,6 +83,7 @@ You can see the launch ID number [here](https://api.spacexdata.com/v5/launches).
 ```bash
 python main.py --count number-of-pictures
 ```
+
 - For NASA's EPIC: You can specify a date in the format YYYY.MM.DD to retrieve Earth photographs from that day. If no date is provided, the date two days prior will be used:
 ```bash
 python main.py --date date
@@ -90,6 +91,10 @@ python main.py --date date
 - For the image publishing bot, you can specify the posting frequency. By default, it is set to every 4 hours.
 ```bash
 python automatically_post_telegram_bot.py --periodicity Frequency-in-seconds
+```
+And the selection of the folder from which the images will be published. By default, it is set to "images," but you can change it to any other folder.
+```bash
+python automatically_post_telegram_bot.py --path Your-path-to-the-folder
 ```
 - For the bot that sends an image by its name, there is also a default value. If you do not specify the name of the image, a random image from the images folder will be sent.
 ```bash
