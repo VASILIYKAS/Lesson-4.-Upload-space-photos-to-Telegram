@@ -1,3 +1,5 @@
 requests==2.32.3
 python-dotenv==1.0.1
 python-telegram-bot==13.7
+configargparse==1.7
+urlib3==1.26.16
