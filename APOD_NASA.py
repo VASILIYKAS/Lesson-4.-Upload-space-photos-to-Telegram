@@ -3,12 +3,11 @@ import requests
 from dotenv import load_dotenv
 
 
-MIN_IMAGES = 1
-MAX_IMAGES = 100
-
-
 def get_nasa_images(nasa_api_key, count=30):
-    if count is None or count < MIN_IMAGES or count > MAX_IMAGES:
+    min_images = 1
+    max_images = 100
+    
+    if count is None or count < min_images or count > max_images:
         print('The number of images to download must be between 1 and 100')
         return
 
@@ -31,7 +30,7 @@ def get_nasa_images(nasa_api_key, count=30):
 
 def main():
     load_dotenv()
-    
+
     nasa_api_key = os.environ['NASA_API_KEY']
     get_nasa_images(nasa_api_key)
 

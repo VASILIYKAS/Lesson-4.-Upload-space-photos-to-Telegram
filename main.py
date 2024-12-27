@@ -13,9 +13,6 @@ from datetime import datetime
 from dotenv import load_dotenv
 
 
-NUMBER_IMAGES = 30
-
-
 def create_folder(path):
     folder_name = Path(path)
     folder_name.mkdir(parents=True, exist_ok=True)
@@ -45,16 +42,10 @@ def download_image(url, path='images'):
         file.write(response.content)
 
 
-def get_image_format(url):
-
-    split_url = urlsplit(url)
-    path = unquote(split_url.path)
-    file_extension = os.path.splitext(path)
-    return file_extension[1:]
-
-
 def main():
     load_dotenv()
+
+    number_images = 30
 
     parser = argparse.ArgumentParser(
         description='Downloading photos.'
@@ -64,7 +55,7 @@ def main():
     parser.add_argument(
         '--count',
         type=int,
-        default=NUMBER_IMAGES,
+        default=number_images,
         help='Number of photos from NASA'
     )
 

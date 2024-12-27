@@ -2,7 +2,7 @@ import os
 from telegram import Bot
 
 
-TWENTY_MEGABYTES = 20000000
+
 
 
 def get_list_images(folder_path='images'):
@@ -21,8 +21,10 @@ def get_list_images(folder_path='images'):
 
 
 def send_image(bot, channel_id, image_path):
+    twenty_megabytes = 20000000
+
     size_image = os.path.getsize(image_path)
-    if size_image < TWENTY_MEGABYTES:
+    if size_image < twenty_megabytes:
         with open(image_path, 'rb') as photo:
             bot.send_photo(chat_id=channel_id, photo=photo)
     else:
