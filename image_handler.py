@@ -2,9 +2,6 @@ import os
 from telegram import Bot
 
 
-
-
-
 def get_list_images(folder_path='images'):
     images = []
     if os.path.exists(folder_path) and os.path.isdir(folder_path):

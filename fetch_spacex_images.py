@@ -2,7 +2,7 @@ import requests
 import configargparse
 import os
 
-from main import download_image
+from image_downloader import download_image
 from dotenv import load_dotenv
 
 
