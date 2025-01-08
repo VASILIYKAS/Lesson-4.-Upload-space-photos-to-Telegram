@@ -1,6 +1,9 @@
 import os
 import requests
+import configargparse
+
 from dotenv import load_dotenv
+from main import download_image
 
 
 def get_nasa_images(nasa_api_key, count=30):
@@ -31,9 +34,27 @@ def get_nasa_images(nasa_api_key, count=30):
 def main():
     load_dotenv()
 
+    folder_path = os.getenv('FOLDER_PATH', default='images')
     nasa_api_key = os.environ['NASA_API_KEY']
-    get_nasa_images(nasa_api_key)
+    
+    parser = configargparse.ArgParser(
+        description='Download the photo of the day from the NASA website.'
+    )
 
+    parser.add_argument(
+        '--count',
+        type=int,
+        default=os.getenv('IMAGES_COUNT', 30),
+        help='Please specify the number of photos for download'
+    )
+
+    args = parser.parse_args()
+
+    hdurls = get_nasa_images(nasa_api_key, args.count)
+
+    if hdurls:
+        for image in hdurls:
+            download_image(image, f'{folder_path}/NASA_APOD')
 
 if __name__ == '__main__':
     main()

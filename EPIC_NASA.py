@@ -1,9 +1,10 @@
 import os
 import requests
-from datetime import datetime, timedelta
-from urllib.parse import urlencode
-from dotenv import load_dotenv
+import configargparse
 
+from main import download_image
+from datetime import datetime, timedelta
+from dotenv import load_dotenv
 
 
 def get_date_str():
@@ -58,23 +59,41 @@ def get_urls_earth_photo(nasa_api_key, formatted_date=None):
         params = {
             'api_key': nasa_api_key,
         }
-    
-        base_url = f'https://api.nasa.gov/EPIC/archive/natural/{formatted_date}/png/{image_name}.png'
-        
+
+        base_url = f'https://api.nasa.gov/EPIC/archive/natural/{
+            formatted_date}/png/{image_name}.png'
+
         response = requests.get(base_url, params=params)
 
         image_url = response.url
         image_links.append(image_url)
-        
+
     return image_links
 
 
 def main():
     load_dotenv()
-    
+
+    folder_path = os.getenv('FOLDER_PATH', default='images')
     nasa_api_key = os.environ['NASA_API_KEY']
 
-    get_urls_earth_photo(nasa_api_key)
+    parser = configargparse.ArgParser(
+        description='Download Earth photos dated on a specified date'
+    )
+
+    parser.add_argument(
+        '--date',
+        type=str,
+        help='Date of obtaining Earth images (no earlier than 2 days ago)'
+    )
+
+    args = parser.parse_args()
+
+    image_links = get_urls_earth_photo(nasa_api_key, args.date)
+
+    if image_links:
+        for image in image_links:
+            download_image(image, f'{folder_path}/NASA_EPIC')
 
 
 if __name__ == '__main__':
