@@ -77,7 +77,7 @@ In this case, default values will be used:
 ```bash
 python main.py --id number-id
 ```
-You can see the launch ID number [here](https://api.spacexdata.com/v5/launches). At the end of each launch, there is a line with the ID, for example: "id": "5eb87cd9ffd86e000604b32a".
+You can see the launch ID number [here](https://api.spacexdata.com/v5/launches). At the end of each launch, there is a line with the ID, for example: "id": "5eb87d47ffd86e000604b38a".
 \
 - For NASA's Astronomy Picture of the Day (APOD): You can specify the number of pictures. The default is set to 30, but to change it (with a maximum of 100), enter the command:
 ```bash
