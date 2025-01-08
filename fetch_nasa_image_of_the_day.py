@@ -3,7 +3,7 @@ import requests
 import configargparse
 
 from dotenv import load_dotenv
-from main import download_image
+from image_downloader import download_image
 
 
 def get_nasa_images(nasa_api_key, count=30):

@@ -2,7 +2,7 @@ import os
 import requests
 import configargparse
 
-from main import download_image
+from image_downloader import download_image
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
