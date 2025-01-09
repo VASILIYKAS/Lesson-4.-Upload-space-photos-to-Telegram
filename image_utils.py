@@ -16,11 +16,8 @@ def generate_filename():
     return f'image_{timestamp}_{random_number}.jpeg'
 
 
-def generate_image_path(url, path='images'):
+def generate_image_path(path='images'):
     folder_name = create_folder(path)
     filename = generate_filename()
     file_path = folder_name / filename
     return file_path
-
-
-
