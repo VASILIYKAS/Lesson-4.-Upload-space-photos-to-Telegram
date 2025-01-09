@@ -64,6 +64,7 @@ def get_urls_earth_photo(nasa_api_key, formatted_date=None):
             formatted_date}/png/{image_name}.png'
 
         response = requests.get(base_url, params=params)
+        response.raise_for_status()
 
         image_url = response.url
         image_links.append(image_url)
