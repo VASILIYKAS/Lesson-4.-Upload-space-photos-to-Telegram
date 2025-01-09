@@ -1,5 +1,4 @@
 import os
-from telegram import Bot
 
 
 def get_list_images(folder_path='images'):
