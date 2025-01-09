@@ -31,8 +31,8 @@ def post_images(bot, channel_id, folder_path='images', periodicity=FOUR_HOURS):
 def main():
     load_dotenv()
 
-    TOKEN = os.environ['TG_TOKEN']
-    bot = Bot(token=TOKEN)
+    tg_token = os.environ['TG_TOKEN']
+    bot = Bot(token=tg_token)
     channel_id = os.environ['TG_CHAT_ID']
 
     parser = configargparse.ArgParser()
