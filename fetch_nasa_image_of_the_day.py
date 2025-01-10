@@ -1,6 +1,6 @@
 import os
 import requests
-import configargparse
+import argparse
 
 from dotenv import load_dotenv
 from image_downloader import download_image
@@ -37,7 +37,7 @@ def main():
     folder_path = os.getenv('FOLDER_PATH', default='images')
     nasa_api_key = os.environ['NASA_API_KEY']
     
-    parser = configargparse.ArgParser(
+    parser = argparse.ArgumentParser(
         description='Download the photo of the day from the NASA website.'
     )
 
