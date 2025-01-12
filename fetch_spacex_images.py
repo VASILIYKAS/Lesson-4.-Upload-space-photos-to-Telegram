@@ -1,5 +1,5 @@
 import requests
-import configargparse
+import argparse
 import os
 
 from image_downloader import download_image
@@ -37,7 +37,7 @@ def main():
     load_dotenv()
     folder_path = os.getenv('FOLDER_PATH', default='images')
 
-    parser = configargparse.ArgumentParser(description='Downloading photos from spacex.')
+    parser = argparse.ArgumentParser(description='Downloading photos from spacex.')
     parser.add_argument(
         '--id',
         default=os.getenv('LAUNCH_ID', '5eb87d47ffd86e000604b38a'),

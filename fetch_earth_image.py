@@ -1,6 +1,6 @@
 import os
 import requests
-import configargparse
+import argparse
 
 from image_downloader import download_image
 from datetime import datetime, timedelta
@@ -78,7 +78,7 @@ def main():
     folder_path = os.getenv('FOLDER_PATH', default='images')
     nasa_api_key = os.environ['NASA_API_KEY']
 
-    parser = configargparse.ArgParser(
+    parser = argparse.ArgumentParser(
         description='Download Earth photos dated on a specified date'
     )
 
