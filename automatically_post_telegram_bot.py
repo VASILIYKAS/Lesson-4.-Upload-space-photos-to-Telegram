@@ -1,7 +1,7 @@
 import os
 import random
 import time
-import configargparse
+import argparse
 from dotenv import load_dotenv
 from telegram import Bot
 from image_handler import get_list_images, send_image
@@ -35,15 +35,18 @@ def main():
     bot = Bot(token=tg_token)
     channel_id = os.environ['TG_CHAT_ID']
 
-    parser = configargparse.ArgParser()
+    parser = argparse.ArgumentParser(
+        description='''Automatic posting of messages in a Telegram channel. 
+        You can specify a folder with images and the frequency of post publication.'''
+        )
 
-    parser.add(
+    parser.add_argument(
         '--periodicity',
         type=int,
         default=int(os.getenv('POST_PERIODICITY', FOUR_HOURS)),
         help='Frequency of publications in seconds (Default is 4 hours).'
     )
-    parser.add(
+    parser.add_argument(
         '--path',
         default=os.getenv('FOLDER_PATH', 'images'),
         help='Path to the folder containing images'
